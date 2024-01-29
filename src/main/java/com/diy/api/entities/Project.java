@@ -3,6 +3,7 @@ package com.diy.api.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -14,6 +15,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -52,6 +54,9 @@ public class Project implements Serializable {
 
   @Column(name = "deleted")
   private Boolean deleted = false;
+
+  @OneToMany(mappedBy = "project")
+  private List<ProjectInstruction> projectInstructions;
 
   public Project() {
   }
@@ -131,5 +136,13 @@ public class Project implements Serializable {
   public void setEstimatedCost(BigDecimal estimatedCost) {
     this.estimatedCost = estimatedCost;
   }
-  
+
+  public List<ProjectInstruction> getProjectInstructions() {
+    return projectInstructions;
+  }
+
+  public void setProjectInstructions(List<ProjectInstruction> projectInstructions) {
+    this.projectInstructions = projectInstructions;
+  }
+
 }
