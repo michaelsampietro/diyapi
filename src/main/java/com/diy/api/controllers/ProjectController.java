@@ -30,7 +30,7 @@ public class ProjectController {
 
 	@GetMapping("recent")
 	public ResponseEntity<List<Project>> getRecentProjects() {
-		return new ResponseEntity(projectService.getRecentProjects(), HttpStatus.OK);
+		return new ResponseEntity<List<Project>>(projectService.getRecentProjects(), HttpStatus.OK);
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
