@@ -13,8 +13,6 @@ import com.diy.api.entities.ProjectInstruction;
 import com.diy.api.repositories.ProjectInstructionRepository;
 import com.diy.api.repositories.ProjectRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class ProjectService {
 
