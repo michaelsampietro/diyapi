@@ -15,6 +15,8 @@ import com.diy.api.services.ProjectService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/project")
@@ -24,17 +26,22 @@ public class ProjectController {
 	ProjectService projectService;
 
 	@GetMapping
-	public ResponseEntity<List<Project>> getAllProjects() {
+	public ResponseEntity<List<Project>> getAllProjects() throws Exception {
 		return new ResponseEntity<List<Project>>(projectService.getAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("recent")
-	public ResponseEntity<List<Project>> getRecentProjects() {
+	public ResponseEntity<List<Project>> getRecentProjects() throws Exception {
 		return new ResponseEntity<List<Project>>(projectService.getRecentProjects(), HttpStatus.OK);
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Project> postMethodName(@RequestBody Project project) {
+	public ResponseEntity<Project> createProject(@RequestBody Project project) throws Exception {
 		return new ResponseEntity<Project>(projectService.saveProject(project), HttpStatus.CREATED);
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Project> updateProject(@PathVariable String id, @RequestBody Project project) throws Exception {
+		return new ResponseEntity<Project>(projectService.updateProject(project), HttpStatus.OK);
 	}
 }

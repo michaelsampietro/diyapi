@@ -2,8 +2,14 @@ package com.diy.api.entities;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.Cascade;
+
+// import org.hibernate.annotations.Cascade;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,11 +32,17 @@ public class ProjectInstruction implements Serializable {
   @Column(name = "instruction_order", nullable = false, precision = 0)
   private int instructionOrder = 0;
 
-  @Column(name = "description", length = 5000)
+  @Column(name = "description", nullable = false, length = 5000)
   private String description;
 
+  @Column(name = "image_url", length = 2000)
+  private String imageUrl;
+  
+  @Column(name = "video_url", length = 2000)
+  private String videoUrl;
+
   @ManyToOne
-  @JoinColumn(name = "project_id", nullable = false)
+  @JoinColumn(name = "project_id")
   @JsonIgnore
   private Project project;
 
@@ -68,5 +80,21 @@ public class ProjectInstruction implements Serializable {
 
   public void setProject(Project project) {
   this.project = project;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+  public String getVideoUrl() {
+    return videoUrl;
+  }
+
+  public void setVideoUrl(String videoUrl) {
+    this.videoUrl = videoUrl;
   }
 }

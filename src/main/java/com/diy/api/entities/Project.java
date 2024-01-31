@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -57,6 +58,9 @@ public class Project implements Serializable {
 
   @OneToMany(mappedBy = "project")
   private List<ProjectInstruction> projectInstructions;
+
+  // @OneToMany(mappedBy = "project", orphanRemoval = true)
+  // private List<ProjectMaterial> projectMaterials;
 
   public Project() {
   }
@@ -144,5 +148,17 @@ public class Project implements Serializable {
   public void setProjectInstructions(List<ProjectInstruction> projectInstructions) {
     this.projectInstructions = projectInstructions;
   }
+
+  public void removeProjectInstructions() {
+    this.projectInstructions.removeAll(projectInstructions);
+}
+
+  // public List<ProjectMaterial> getProjectMaterials() {
+  //   return projectMaterials;
+  // }
+
+  // public void setProjectMaterials(List<ProjectMaterial> projectMaterials) {
+  //   this.projectMaterials = projectMaterials;
+  // }
 
 }
